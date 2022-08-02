@@ -22,7 +22,7 @@ class BaseModel:
         self.updated_at = datetime.datetime.now()
 
     def to_dict(self):
-        dict_repr = copy.copy(self.__dict__)
+        dict_repr = self.__dict__.copy()
         dict_repr["__class__"] = type(self).__name__
         dict_repr["created_at"] = self.created_at.isoformat()
         dict_repr["updated_at"] = self.updated_at.isoformat()
