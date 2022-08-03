@@ -2,9 +2,8 @@
 
 """Base model module for all classes"""
 
-import copy
-import datetime
 import uuid
+import datetime
 
 
 class BaseModel:
