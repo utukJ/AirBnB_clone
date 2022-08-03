@@ -5,11 +5,18 @@
 import uuid
 import datetime
 
-
 class BaseModel:
     """Base model from which all other classes inherit from"""
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+        if kwargs:
+            for k, v in kwargs:
+                if k == "created_at" or k == "updated_at":
+                    v = datetime.datetime.fromisoformat(v)
+                    self.__setattr__(k, v)
+                elif k != "__class__":
+                    self.__setattr__(k, v)
+            return
         self.id = str(uuid.uuid4())
         self.created_at = datetime.datetime.now()
         self.updated_at = datetime.datetime.now()
