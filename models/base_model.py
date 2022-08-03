@@ -3,9 +3,7 @@
 """Base model module for all classes"""
 
 import datetime
-from multiprocessing.sharedctypes import Value
 import uuid
-
 
 class BaseModel:
     """Base model from which all other classes inherit from"""
