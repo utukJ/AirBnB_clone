@@ -4,13 +4,14 @@
 
 import uuid
 import datetime
+import models
 
 class BaseModel:
     """Base model from which all other classes inherit from"""
 
     def __init__(self, *args, **kwargs):
         if kwargs:
-            for k, v in kwargs:
+            for k, v in kwargs.items():
                 if k == "created_at" or k == "updated_at":
                     v = datetime.datetime.fromisoformat(v)
                     self.__setattr__(k, v)
@@ -20,12 +21,14 @@ class BaseModel:
         self.id = str(uuid.uuid4())
         self.created_at = datetime.datetime.now()
         self.updated_at = datetime.datetime.now()
+        models.storage.new(self)
 
     def __str__(self):
         return f"[{type(self).__name__}] (<{self.id}>) <{self.__dict__}>"
 
     def save(self):
         self.updated_at = datetime.datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         dict_repr = self.__dict__.copy()
