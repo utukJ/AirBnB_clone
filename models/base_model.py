@@ -24,7 +24,7 @@ class BaseModel:
         models.storage.new(self)
 
     def __str__(self):
-        return f"[{type(self).__name__}] (<{self.id}>) <{self.__dict__}>"
+        return f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         self.updated_at = datetime.datetime.now()

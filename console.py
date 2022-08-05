@@ -10,7 +10,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) " 
 
     ClassNameMissing = "** class name missing **"
-    ClassNotExist = "** class doesn't exixt **"
+    ClassNotExist = "** class doesn't exist **"
     InstanceIDMissing = "** instance id missing **"
     NoInstanceFound = "** no instance found **"
     AttributeNameMissing = "** attribute name missing **"
@@ -19,7 +19,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, line):
         """creates a new instance of a given class. Usage create <class_name>"""
         args = line.split()
-        if not (class_name := self.validate_class_name(line)):
+        if not (class_name := self.validate_class_name(args)):
             return
         obj = eval(class_name)()
         obj.save()
@@ -88,7 +88,7 @@ class HBNBCommand(cmd.Cmd):
             print(cls.InstanceIDMissing)
             return
         key = args[0] + "." + args[1]
-        if key not in models.storage.__objects.keys():
+        if key not in models.storage.all().keys():
             print(cls.NoInstanceFound)
             return
         return args[1]
