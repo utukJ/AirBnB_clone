@@ -5,6 +5,12 @@
 import cmd
 import models
 from models.base_model import BaseModel
+from models.user import User
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) " 
@@ -15,6 +21,8 @@ class HBNBCommand(cmd.Cmd):
     NoInstanceFound = "** no instance found **"
     AttributeNameMissing = "** attribute name missing **"
     ValueMissing = "** value missing **"
+
+    valid_classes = ["BaseModel", "User"]
 
     def do_create(self, line):
         """creates a new instance of a given class. Usage create <class_name>"""
@@ -75,9 +83,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print(cls.ClassNameMissing)
             return
-        try:
-            mdl = eval(args[0])
-        except NameError:
+        if args[0] not in cls.valid_classes:
             print(cls.ClassNotExist)
             return
         return args[0]
