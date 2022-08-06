@@ -12,8 +12,9 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 
+
 class HBNBCommand(cmd.Cmd):
-    prompt = "(hbnb) " 
+    prompt = "(hbnb) "
 
     ClassNameMissing = "** class name missing **"
     ClassNotExist = "** class doesn't exist **"
@@ -25,7 +26,10 @@ class HBNBCommand(cmd.Cmd):
     valid_classes = ["BaseModel", "User"]
 
     def do_create(self, line):
-        """creates a new instance of a given class. Usage create <class_name>"""
+        """
+        creates a new instance of a given class.
+        Usage create <class_name>
+        """
         args = line.split()
         if not (class_name := self.validate_class_name(args)):
             return
@@ -34,7 +38,10 @@ class HBNBCommand(cmd.Cmd):
         print(obj.id)
 
     def do_show(self, line):
-        """shows an instance of a given class. Usage: show <class_name> <id>"""
+        """
+        shows an instance of a given class.
+        Usage: show <class_name> <id>
+        """
         args = line.split()
         if not (class_name := self.validate_class_name(args)):
             return
@@ -43,7 +50,10 @@ class HBNBCommand(cmd.Cmd):
         print(models.storage.all()[class_name + "." + id])
 
     def do_destroy(self, line):
-        """destroys an instance of a given class. Usage destroy <class_name> <id>"""
+        """
+        destroys an instance of a given class.
+        Usage destroy <class_name> <id>
+        """
         args = line.split()
         if not (class_name := self.validate_class_name(args)):
             return
@@ -53,7 +63,10 @@ class HBNBCommand(cmd.Cmd):
         models.storage.save()
 
     def do_all(self, line):
-        """shows all stored instances of a given class. Usage: all <class_name>"""
+        """
+        shows all stored instances of a given class.
+        Usage: all <class_name>
+        """
         args = line.split()
         if not (class_name := self.validate_class_name(args)):
             return
@@ -64,7 +77,10 @@ class HBNBCommand(cmd.Cmd):
         print(instances)
 
     def do_update(self, line):
-        """update instance. Usage: update <class_name> <id> <attribute> <value>"""
+        """
+        update instance.
+        Usage: update <class_name> <id> <attribute> <value>
+        """
         args = line.split()
         if not (class_name := self.validate_class_name(args)):
             return
@@ -76,7 +92,13 @@ class HBNBCommand(cmd.Cmd):
             return
         obj = models.storage.all()[class_name + "." + id]
         setattr(obj, attr, val)
-        models.storage.save()
+        obj.save()
+
+    def emptyline(self) -> bool:
+        pass
+
+    def default(self, line):
+        pass
 
     @classmethod
     def validate_class_name(cls, args):
@@ -98,7 +120,7 @@ class HBNBCommand(cmd.Cmd):
             print(cls.NoInstanceFound)
             return
         return args[1]
-        
+
     @classmethod
     def validate_attr_name(cls, args):
         if len(args) < 3:
@@ -116,7 +138,7 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, arg):
         """exit the console. Usage: quit"""
         return True
-    
+
     def do_EOF(self, arg):
         """same as quit"""
         return self.do_quit(arg)

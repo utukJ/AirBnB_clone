@@ -6,6 +6,7 @@ import uuid
 import datetime
 import models
 
+
 class BaseModel:
     """Base model from which all other classes inherit from"""
 

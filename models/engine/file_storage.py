@@ -11,6 +11,7 @@ from ..place import Place
 from ..review import Review
 from ..state import State
 
+
 class FileStorage:
     """Class to manage file storage of objects"""
 
@@ -23,7 +24,7 @@ class FileStorage:
 
     def new(self, obj):
         """sets in __objects the obj with key <obj class name>.id"""
-        self.__objects[obj.__class__.__name__  + "." + obj.id] = obj
+        self.__objects[obj.__class__.__name__ + "." + obj.id] = obj
 
     def save(self):
         """serialize all objects into json file"""
