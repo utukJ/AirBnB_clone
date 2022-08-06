@@ -14,7 +14,7 @@ from models.state import State
 
 
 class HBNBCommand(cmd.Cmd):
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
 
     ClassNameMissing = "** class name missing **"
     ClassNotExist = "** class doesn't exist **"
@@ -155,11 +155,11 @@ class HBNBCommand(cmd.Cmd):
         return args[3]
 
     def do_quit(self, arg):
-        """exit the console. Usage: quit"""
+        """Quit command to exit the program"""
         return True
 
     def do_EOF(self, arg):
-        """same as quit"""
+        """Quit command to exit the program"""
         return self.do_quit(arg)
 
 
