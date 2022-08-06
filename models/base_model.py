@@ -10,6 +10,7 @@ class BaseModel:
     """Base model from which all other classes inherit from"""
 
     def __init__(self, *args, **kwargs):
+        """?"""
         if kwargs:
             for k, v in kwargs.items():
                 if k == "created_at" or k == "updated_at":
