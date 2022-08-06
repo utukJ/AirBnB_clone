@@ -25,13 +25,16 @@ class BaseModel:
         models.storage.new(self)
 
     def __str__(self):
+        """return string rep"""
         return f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
+        """save to storage"""
         self.updated_at = datetime.datetime.now()
         models.storage.save()
 
     def to_dict(self):
+        """convert to dictionary"""
         dict_repr = self.__dict__.copy()
         dict_repr["__class__"] = type(self).__name__
         dict_repr["created_at"] = self.created_at.isoformat()
