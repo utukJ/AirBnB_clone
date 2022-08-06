@@ -105,7 +105,19 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def default(self, line):
-        pass
+        try:
+            i_dot = line.index(".")
+            class_name = line[:i_dot]
+            i_b1 = line.index("(")
+            action = line[i_dot+1:i_b1]
+            i_b2 = line.index(")")
+            params = line[i_b1+1:i_b2].split(",")
+            params = list(map(str.strip, params))
+            cmd_arg = class_name + " ".join(params)
+            print(action + " " + cmd_arg)
+            return eval("self.do_" + action)(cmd_arg)
+        except IndexError:
+            pass
 
     @classmethod
     def validate_class_name(cls, args):
