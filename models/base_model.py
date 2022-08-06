@@ -4,8 +4,7 @@
 
 import uuid
 import datetime
-import models
-
+from models import storage
 
 class BaseModel:
     """Base model from which all other classes inherit from"""
@@ -22,7 +21,7 @@ class BaseModel:
         self.id = str(uuid.uuid4())
         self.created_at = datetime.datetime.now()
         self.updated_at = datetime.datetime.now()
-        models.storage.new(self)
+        storage.new(self)
 
     def __str__(self):
         """return string rep"""
@@ -31,7 +30,7 @@ class BaseModel:
     def save(self):
         """save to storage"""
         self.updated_at = datetime.datetime.now()
-        models.storage.save()
+        storage.save()
 
     def to_dict(self):
         """convert to dictionary"""
