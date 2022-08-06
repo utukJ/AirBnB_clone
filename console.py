@@ -23,7 +23,14 @@ class HBNBCommand(cmd.Cmd):
     AttributeNameMissing = "** attribute name missing **"
     ValueMissing = "** value missing **"
 
-    valid_classes = ["BaseModel", "User"]
+    valid_classes = [
+        "BaseModel",
+        "State",
+        "City",
+        "Place",
+        "Review",
+        "Amenity",
+        ]
 
     def do_create(self, line):
         """
