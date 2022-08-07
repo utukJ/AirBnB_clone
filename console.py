@@ -101,6 +101,7 @@ class HBNBCommand(cmd.Cmd):
         obj.save()
 
     def do_count(self, line):
+        """Count all instances of a given class"""
         args = line.split()
         if not (class_name := self.validate_class_name(args)):
             return
@@ -170,6 +171,7 @@ class HBNBCommand(cmd.Cmd):
         return self.do_quit(arg)
 
     def do_help(self, arg: str) -> bool | None:
+        """Show help"""
         return super().do_help(arg)
 
 
