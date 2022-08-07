@@ -129,6 +129,7 @@ class HBNBCommand(cmd.Cmd):
                 update_map = eval(params[1])
                 id = params[0]
                 for k, v in update_map.items():
+                    v = f"'{v}'"
                     print(" ".join([action, id, k, v]))
                     self.do_update(" ".join([id, k, v]))
                 return
