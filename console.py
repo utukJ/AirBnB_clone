@@ -12,7 +12,7 @@ from models.state import State
 
 
 class HBNBCommand(cmd.Cmd):
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
 
     ClassNameMissing = "** class name missing **"
     ClassNotExist = "** class doesn't exist **"
@@ -163,11 +163,11 @@ class HBNBCommand(cmd.Cmd):
         return args[3]
 
     def do_quit(self, arg):
-        """Quit command to exit the program"""
+        """Quit command to exit the program\n"""
         return True
 
     def do_EOF(self, arg):
-        """Quit command to exit the program"""
+        """Quit command to exit the program\n"""
         return self.do_quit(arg)
 
     def do_help(self, arg: str) -> bool | None:
