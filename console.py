@@ -170,10 +170,6 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program"""
         return self.do_quit(arg)
 
-    def do_help(self, arg: str) -> bool | None:
-        """Show help"""
-        return super().do_help(arg)
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
