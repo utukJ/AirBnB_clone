@@ -122,17 +122,18 @@ class HBNBCommand(cmd.Cmd):
             i_b1 = line.index("(")
             action = line[i_dot+1:i_b1]
             i_b2 = line.index(")")
-            params = line[i_b1+1:i_b2].split(",")
+            in_bracket = line[i_b1+1:i_b2]
+            if action == "update" and "{" in in_bracket:
+                id, update = in_bracket.split(",", maxsplit=1)
+                update = eval(update)
+                id = id.strip('"')
+                for k, v in update.items():
+                    print(k, v)
+                    self.do_update(" ".join([class_name, id, k, str(v)]))
+                return
+            params = in_bracket.split(",")
             params = list(map(lambda x: x.strip(' "'), params))
             cmd_arg = class_name + " " + " ".join(params)
-            if action == "update" and params[1].startswith("{") and params[1].endswith("}"):
-                update_map = eval(params[1])
-                id = params[0]
-                for k, v in update_map.items():
-                    v = f"'{v}'"
-                    print(" ".join([action, class_name, id, k, v]))
-                    self.do_update(" ".join([class_name, id, k, v]))
-                return
             return eval("self.do_" + action)(cmd_arg)
         except ValueError:
             pass
