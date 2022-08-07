@@ -30,6 +30,7 @@ class HBNBCommand(cmd.Cmd):
         "Place",
         "Review",
         "Amenity",
+        "User",
         ]
 
     def do_create(self, line):
@@ -101,6 +102,17 @@ class HBNBCommand(cmd.Cmd):
         setattr(obj, attr, val)
         obj.save()
 
+    def do_count(self, line):
+        args = line.split()
+        if not (class_name := self.validate_class_name(args)):
+            return
+        count = 0
+        for k, v in models.storage.all().items():
+            if k.split(".")[0] == class_name:
+                count += 1
+        print(count)
+
+
     def emptyline(self) -> bool:
         pass
 
@@ -112,11 +124,9 @@ class HBNBCommand(cmd.Cmd):
             action = line[i_dot+1:i_b1]
             i_b2 = line.index(")")
             params = line[i_b1+1:i_b2].split(",")
-            params = list(map(str.strip, params))
-            cmd_arg = class_name + " ".join(params)
-            print(action + " " + cmd_arg)
+            cmd_arg = class_name + " " + " ".join(params)
             return eval("self.do_" + action)(cmd_arg)
-        except IndexError:
+        except ValueError:
             pass
 
     @classmethod
