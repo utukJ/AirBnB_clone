@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Console for airbnb"""
 import cmd
+import sys
 import models
 from models.base_model import BaseModel
 from models.user import User
@@ -163,11 +164,11 @@ class HBNBCommand(cmd.Cmd):
         return args[3]
 
     def do_quit(self, arg):
-        """Quit command to exit the program"""
-        return True
+        """Quit command to exit the program\n"""
+        raise SystemExit
 
     def do_EOF(self, arg):
-        """Quit command to exit the program"""
+        """Quit command to exit the program\n"""
         return self.do_quit(arg)
 
 
