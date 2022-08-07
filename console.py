@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-
 """Console for airbnb"""
-
 import cmd
 import models
 from models.base_model import BaseModel
@@ -172,5 +170,5 @@ class HBNBCommand(cmd.Cmd):
         return self.do_quit(arg)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     HBNBCommand().cmdloop()
