@@ -124,6 +124,7 @@ class HBNBCommand(cmd.Cmd):
             i_b2 = line.index(")")
             params = line[i_b1+1:i_b2].split(",")
             params = list(map(str.strip, params))
+            cmd_arg = class_name + " " + " ".join(params)
             if action == "update" and params[1].startswith("{") and params[1].endswith("}"):
                 update_map = eval(params[1])
                 id = params[0]
