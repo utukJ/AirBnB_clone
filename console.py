@@ -14,7 +14,7 @@ from models.state import State
 
 
 class HBNBCommand(cmd.Cmd):
-    prompt = "(hbnb) "
+    prompt = "(hbnb)"
 
     ClassNameMissing = "** class name missing **"
     ClassNotExist = "** class doesn't exist **"
