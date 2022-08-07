@@ -98,7 +98,7 @@ class HBNBCommand(cmd.Cmd):
         if (val := self.validate_attr_value(args)) is None:
             return
         obj = models.storage.all()[class_name + "." + id]
-        setattr(obj, attr, val)
+        setattr(obj, attr, eval(val))
         obj.save()
 
     def do_count(self, line):
@@ -123,7 +123,15 @@ class HBNBCommand(cmd.Cmd):
             action = line[i_dot+1:i_b1]
             i_b2 = line.index(")")
             params = line[i_b1+1:i_b2].split(",")
+            params = list(map(str.strip, params))
             cmd_arg = class_name + " " + " ".join(params)
+            if action == "update" and params[1].startswith("{") and params[1].endswith("}"):
+                update_map = eval(params[1])
+                id = params[0]
+                for k, v in update_map.items():
+                    print(" ".join([action, id, k, v]))
+                    self.do_update(" ".join([id, k, v]))
+                return
             return eval("self.do_" + action)(cmd_arg)
         except ValueError:
             pass
